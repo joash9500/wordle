@@ -5,39 +5,56 @@ const guessV = document.getElementById('guess');
 const uMsg = document.getElementById('userMsg');
 const submitButton = document.getElementById('submit')
 const answer = validWords[Math.floor(Math.random()*validWords.length)]; //generate random word (answer to game)]
+const answerLC = answer.toLowerCase(); //convert answer to lowercase
+const answerObj = answerLC.split(""); //split the answer into object/array
 
-//convert to lowercase
-const answerLC = answer.toLowerCase();
-const guessVLC = guessV.value;
+console.log(answerObj) //cheat
 
-console.log(guessVLC)
-
-const answerObj = answer.split(""); //split the answer
-
-console.log(answerObj)
+let guessCount = 0; //start counting user attempts
 
 submitButton.addEventListener('click', function() {
     if (guessV.value.length == 0) {
         uMsg.innerText = "Guess a letter!"
     } else if (guessV.value.length == 1) {
-        checkLetter()
+        guessCount = guessCount + 1;
+        attempt(guessCount);
     } else {
         uMsg.innerText = "One letter only please!"
     } 
 })
 
 //function to check the input from user
-function checkLetter() {
-    //iterate over answerObj to check if guessV matches
+function checkLetter(attemptID) {
+    //iterate over answerObj to check if guessVLC matches
     for (i=0; i<answerObj.length; i++) {
-        const divID = 'letter' + i; //get addresses of divs
-        const divElms = document.getElementsByClassName(divID); 
-        if (guessV.value.toLowerCase() == answerObj[i].toLowerCase()) {
+        // const divID = 'letter' + i; //get addresses of divs
+        // const divElms = document.getElementsByClassName(divID); 
+
+        if (guessV.value.toLowerCase() == answerObj[i]) {
             console.log(i)
-            divElms[i].innerText = answerObj[i]
+            let divChild = document.querySelector(attemptID).children[i]
+            divChild.innerText = answerObj[i]
+            // divElms[i].innerText = answerObj[i]
         } else {
-            // wordSplitter(answer) //assign answer again to next row
+            // nothing yet
         }
+    }
+}
+
+//attempt function
+function attempt(guessCount) {
+    if (guessCount == 1) {
+        checkLetter('#attempt1')
+    } else if (guessCount == 2) {
+        checkLetter('#attempt2')
+    } else if (guessCount == 3) {
+        checkLetter('#attempt3')
+    } else if (guessCount == 4) {
+        checkLetter('#attempt4')
+    } else if (guessCount == 5) {
+        checkLetter('#attempt5')
+    } else if (guessCount > 5) {
+        uMsg.innerText = 'you ran out of guesses! try again!'
     }
 }
 
