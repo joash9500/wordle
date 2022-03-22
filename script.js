@@ -32,24 +32,30 @@ submitButton.addEventListener('click', function() {
 //function to check the input from user
 function checkLetter(attemptID) {
     const guessObj = guessV.value.toLowerCase().split(""); //split player's guess word into lowercase, and convert into an object.
-    
     console.log(guessObj);
-
     correctCount = 0; //reset counter
 
     //iterate over answerObj to check if guessV matches
     for (i=0; i<answerObj.length; i++) {
+        
+        let divChild = document.querySelector(attemptID).children[i];
+        divChild.innerText = guessObj[i];
+
         if (guessObj[i] == answerObj[i]) {
-            let divChild = document.querySelector(attemptID).children[i]
-            divChild.innerText = answerObj[i]
+            
+            divChild.classList.add('correct');
             correctCount = correctCount + 1; //if letter with index i is guessed correctly, add to counter
+
+        } else if (answerObj.includes(guessObj[i])) {
+            //nothing yet
+            divChild.classList.add('almost')
+
         } else {
-            // nothing yet
+            //nothing yet
         }
+
     }
-
     console.log(correctCount)    
-
 }
 
 //attempt function

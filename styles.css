@@ -26,8 +26,16 @@ body > section {
     border-color: green;
     height: 50px;
     width: 50px;
+    margin: 5px;
 }
 
+.correct {
+    background-color: green;
+}
+
+.almost {
+    background-color: orange;
+}
 
 
 
