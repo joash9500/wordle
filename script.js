@@ -10,43 +10,46 @@ const answer = validWords[Math.floor(Math.random()*validWords.length)]; //genera
 const answerLC = answer.toLowerCase(); //convert answer to lowercase
 const answerObj = answerLC.split(""); //split the answer into object/array
 
-
 console.log(answerObj) //cheat
 
 let guessCount = 0; //start counting user attempts
+let correctCount = 0; //initialise counter for correct letters
 
 submitButton.addEventListener('click', function() {
 
     if (guessV.value.length == 0) {
         uMsg.innerText = "Guess a letter!"
-    } else if (guessV.value.length == 5) {
+    } else if (guessV.value.length == 5 && correctCount < 5) {
         guessCount = guessCount + 1;
         attempt(guessCount);
+    } else if (correctCount == 5) {
+        uMsg.innerText = 'No more guesses please! you already won the game :)'
     } else {
         uMsg.innerText = "A five letter word only please!"
     } 
 })
 
-
-
 //function to check the input from user
 function checkLetter(attemptID) {
-   
     const guessObj = guessV.value.toLowerCase().split(""); //split player's guess word into lowercase, and convert into an object.
     
     console.log(guessObj);
 
+    correctCount = 0; //reset counter
+
     //iterate over answerObj to check if guessV matches
     for (i=0; i<answerObj.length; i++) {
         if (guessObj[i] == answerObj[i]) {
-            console.log(i)
             let divChild = document.querySelector(attemptID).children[i]
             divChild.innerText = answerObj[i]
-            // divElms[i].innerText = answerObj[i]
+            correctCount = correctCount + 1; //if letter with index i is guessed correctly, add to counter
         } else {
             // nothing yet
         }
     }
+
+    console.log(correctCount)    
+
 }
 
 //attempt function

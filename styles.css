@@ -21,37 +21,13 @@ body > section {
     flex-wrap: wrap;
 }
 
-.letter0 {
-    border-style: solid;
-    border-color: crimson;
-    height: 50px;
-    width: 50px;
-}
-
-.letter1 {
-    border-style: solid;
-    border-color: blue;
-    height: 50px;
-    width: 50px;
-}
-
-.letter2 {
+.row > div {
     border-style: solid;
     border-color: green;
     height: 50px;
     width: 50px;
 }
 
-.letter3 {
-    border-style: solid;
-    border-color: yellow;
-    height: 50px;
-    width: 50px;
-}
 
-.letter4 {
-    border-style: solid;
-    border-color: purple;
-    height: 50px;
-    width: 50px;
-}
+
+
