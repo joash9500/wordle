@@ -47,15 +47,14 @@ function checkLetter(attemptID) {
             correctCount = correctCount + 1; //if letter with index i is guessed correctly, add to counter
 
         } else if (answerObj.includes(guessObj[i])) {
-            //nothing yet
+    
             divChild.classList.add('almost')
 
         } else {
             //nothing yet
         }
-
     }
-    console.log(correctCount)    
+    reset() //run reset function to end the game
 }
 
 //attempt function
@@ -75,22 +74,38 @@ function attempt(guessCount) {
     }
 }
 
-// //split word into individual letters and pass it to the div elements
-// function wordSplitter() {
-    
-//     for (i=0; i<answerObj.length ; i++) {
-//         let divElm = 'letter'+i; //create a DOMstring
-//         let letterElms = document.getElementsByClassName(divElm); //retrieve the list of div elements
+//update page
+function reset() {
+    if (correctCount == 5) {
         
-//         //pass letter to div elements
-//         for (const index in letterElms) {
-//              letterElms[index].innerText = answerObj[i]         
-//         }
-//     }
-// }
+        const resetButton = document.createElement('button')
+        resetButton.addEventListener('click', function() {
+            
+            guessCount = 0;
+            uMsg.innerText = "Game restarted"
+            const wordleRows = document.querySelectorAll('.row')
 
-// //call wordSplitter to initiate assignment to div elements
-// wordSplitter()
+            for (j=0; j<wordleRows.length; j++) {
+                //get rows 
+                let wordleRow = wordleRows[j].children;
+                
+                for (k=0; k<wordleRow.length; k++) {
+                    //get letters in row
+                    wordleRow[k].innerText = "" //delete any text content
+                }
+            }
+        })
+
+        resetButton.textContent = 'Restart'
+        document.querySelector('.buttons').appendChild(resetButton)
+        
+        alert('You Win!')
+
+    } else {
+        document.querySelector('footer > p > span').innerText = guessCount;
+    }
+}
+
 
 
 
