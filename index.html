@@ -56,16 +56,22 @@
         <p>Guess a 5 letter word</p>
         <!-- user passes in one letter to input -->
         <input type="text" placeholder="guess" id="guess">
+        <button id="submit">Check</button>
+        
         <div class="buttons">
-            <button id="submit">Check</button>
+            <!-- buttons added and removed here -->
+            <button id="startButton" onclick="timer()">Start</button>
+            <button id="restartButton" onclick="reset()">Restart</button>
         </div>
 
     </section>
 
     <footer>
+
         <p>Attempts: <span>0</span></p>
-        
         <p id="userMsg"></p>
+        <p id="timer">timer: <span>60:00</span></p>
+
     </footer>
     
 </body>
