@@ -22,7 +22,9 @@ submitButton.addEventListener('click', function() {
     } else if (guessV.value.length == 5 && correctCount < 5) {
         guessCount = guessCount + 1;
         attempt(guessCount);
-    } 
+    } else {
+        uMsg.innerText = 'Check your guess. It\'s a 5 letter word'
+    }
 })
 
 //function to check the input from user
@@ -79,24 +81,20 @@ function attempt(guessCount) {
 //restart the game using restart button
 function reset() {
 
-    const resetButton = document.getElementById('restartButton')
-    
-    resetButton.addEventListener('click', function() {
-
-        guessCount = 0;
-        uMsg.innerText = "Game restarted"
-        const wordleRows = document.querySelectorAll('.row')
-        for (j=0; j<wordleRows.length; j++) {
-            //get rows 
-            let wordleRow = wordleRows[j].children;
-            for (k=0; k<wordleRow.length; k++) {
-                //get letters in row
-                wordleRow[k].innerText = "" //delete letter text
-                wordleRow[k].classList.remove('almost','correct')
-            }
+    guessCount = 0;
+    uMsg.innerText = "Game restarted"
+    const wordleRows = document.querySelectorAll('.row')
+    for (j=0; j<wordleRows.length; j++) {
+        //get rows 
+        let wordleRow = wordleRows[j].children;
+        for (k=0; k<wordleRow.length; k++) {
+            //get letters in row
+            wordleRow[k].innerText = "" //delete letter text
+            wordleRow[k].classList.remove('almost','correct')
         }
-    })
-    document.querySelector('.buttons').appendChild(resetButton)
+    }
+    //set timer back to 60 seconds when reset is clicked
+    document.querySelector('#timer > span').innerHTML='00:60';
 
 }
 
