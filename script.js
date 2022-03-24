@@ -6,7 +6,7 @@ const validWords = ['AALII', 'AARGH', 'AARTI', 'ABACA', 'ABACI', 'ABACK', 'ABACS
 const guessV = document.getElementById('guess'); //player guesses 5 letter word
 const uMsg = document.getElementById('userMsg');
 const submitButton = document.getElementById('submit');
-const answer = validWords[Math.floor(Math.random()*validWords.length)]; //generate random word (answer to game)]
+const answer = validWords[Math.floor(Math.random()*validWords.length)]; //generate random word
 const answerLC = answer.toLowerCase(); //convert answer to lowercase
 const answerObj = answerLC.split(""); //split the answer into object/array
 
@@ -14,6 +14,10 @@ console.log(answerObj) //cheat
 
 let guessCount = 0; //start counting user attempts
 let correctCount = 0; //initialise counter for correct letters
+
+//hide restart and check buttons
+document.getElementById('restartButton').style.display = 'none'
+document.getElementById('submit').style.display = 'none'
 
 submitButton.addEventListener('click', function() {
     if (guessV.value.length == 0) {
@@ -75,11 +79,16 @@ function attempt(guessCount) {
         checkLetter('#attempt5')
     } else if (guessCount > 5) {
         uMsg.innerText = 'you ran out of guesses! try again!'
+        //show restart button when guesses run out
+        document.getElementById('restartButton').style.display = 'block'
     }
 }
 
-//restart the game using restart button
+//restart the game using Try again button
 function reset() {
+    //set timer back to 60 seconds and restart countdown
+    document.querySelector('#timer > span').innerHTML='00:60';
+    timer()
 
     guessCount = 0;
     uMsg.innerText = "Game restarted"
@@ -93,8 +102,9 @@ function reset() {
             wordleRow[k].classList.remove('almost','correct')
         }
     }
-    //set timer back to 60 seconds when reset is clicked
-    document.querySelector('#timer > span').innerHTML='00:60';
+    
+    //hide 'Try again' button after above code is run
+    document.getElementById('restartButton').style.display = 'none';
 
 }
 
@@ -102,15 +112,22 @@ function reset() {
 
 function timer() {
     let sec = 60; //set a 60 second timer
-    let second30 = setInterval(function(){
+    let second60 = setInterval(function(){
         document.querySelector('#timer > span').innerHTML='00:'+sec;
         sec--; //decrement sec
         if (sec < 0) {
-            clearInterval(second30);
+            clearInterval(second60);
             uMsg.innerText = 'so close! try again'
         } else if (correctCount == 5) {
-            clearInterval(second30)
+            clearInterval(second60)
+        } else if (guessCount > 5) {
+            clearInterval(second60)
         }
     },1000)
+
+    //hide start and show check button
+    document.getElementById('startButton').style.display = 'none';
+    document.getElementById('submit').style.display = 'block';
 }
+
 
