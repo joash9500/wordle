@@ -2,23 +2,43 @@
     border: 2px solid blue;
 } */
 
-/* body {
+body {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 6fr 1fr;
+    /* grid-template-columns: 1fr 1fr; */
+    grid-template-rows: 1fr 2fr 1fr;
+    align-items: center;
+    justify-content: center;
 }
 
-body > header {
-    grid-area: 1 1 2 3;
+header {
+    text-align: center;
 }
 
-body > section {
-    grid-area: 2 1 3 4;
-} */
+footer {
+    text-align: center
+}
+
+p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 20px;
+}
+
+h1 {
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 50px;
+}
+
+h2 {
+    font-family: 'Chakra Petch', sans-serif;
+}
+
 
 .row {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .row > div {
@@ -27,6 +47,36 @@ body > section {
     height: 50px;
     width: 50px;
     margin: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    /* vertically align letters in div */
+    padding: 10px 10px; 
+    border-radius: 15px;
+}
+
+#box2 {
+    text-align: center;
+}
+
+#guess {
+    margin: 10px
+}
+
+#timer {
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons > button {
+    /* add spacing around buttons */
+    margin: 10px;
+    padding: 10px;
 }
 
 .correct {
@@ -36,6 +86,7 @@ body > section {
 .almost {
     background-color: orange;
 }
+
 
 
 

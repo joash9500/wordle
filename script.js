@@ -6,9 +6,11 @@ const validWords = ['AALII', 'AARGH', 'AARTI', 'ABACA', 'ABACI', 'ABACK', 'ABACS
 const guessV = document.getElementById('guess'); //player guesses 5 letter word
 const uMsg = document.getElementById('userMsg');
 const submitButton = document.getElementById('submit');
-const answer = validWords[Math.floor(Math.random()*validWords.length)]; //generate random word
-const answerLC = answer.toLowerCase(); //convert answer to lowercase
-const answerObj = answerLC.split(""); //split the answer into object/array
+
+//generate random word and convert to lowercase
+let answer = validWords[Math.floor(Math.random()*validWords.length)].toLowerCase();
+
+let answerObj = answer.split(""); //split the answer into object/array
 
 console.log(answerObj) //cheat
 
@@ -57,7 +59,11 @@ function checkLetter(attemptID) {
 
     //end game if correctCount = 5;
     if (correctCount == 5) {
-        uMsg.innerText = 'good work! click restart to try again'
+        uMsg.innerText = 'Good work! Try again?'
+
+         //display restart button, hide check button
+         document.getElementById('restartButton').style.display = 'block'
+         document.getElementById('submit').style.display = 'none'
 
     } else {
         document.querySelector('footer > p > span').innerText = guessCount;
@@ -78,9 +84,13 @@ function attempt(guessCount) {
     } else if (guessCount == 5) {
         checkLetter('#attempt5')
     } else if (guessCount > 5) {
-        uMsg.innerText = 'you ran out of guesses! try again!'
-        //show restart button when guesses run out
+        uMsg.innerText = 'You ran out of guesses! Try again?'
+
+        //show restart button
         document.getElementById('restartButton').style.display = 'block'
+         
+        //hide check button when time runs out
+        document.getElementById('submit').style.display = 'none'
     }
 }
 
@@ -90,6 +100,12 @@ function reset() {
     document.querySelector('#timer > span').innerHTML='00:60';
     timer()
 
+    //generate random word again
+    answerObj = validWords[Math.floor(Math.random()*validWords.length)].toLowerCase().split("")
+    console.log(answerObj)
+
+    //clear counters
+    correctCount = 0; 
     guessCount = 0;
     uMsg.innerText = "Game restarted"
     const wordleRows = document.querySelectorAll('.row')
@@ -117,9 +133,16 @@ function timer() {
         sec--; //decrement sec
         if (sec < 0) {
             clearInterval(second60);
-            uMsg.innerText = 'so close! try again'
+            uMsg.innerText = 'Times up! Try again?'
+
+            //hide check button when time runs out
+            document.getElementById('submit').style.display = 'none'
+            //show restart button
+            document.getElementById('restartButton').style.display = 'block';
+
         } else if (correctCount == 5) {
             clearInterval(second60)
+
         } else if (guessCount > 5) {
             clearInterval(second60)
         }
