@@ -44,13 +44,15 @@ h2 {
 .row > div {
     border-style: solid;
     border-color: green;
-    height: 50px;
-    width: 50px;
+    /* fix the text size and make a square */
+    font-size: 15px;
+    height: 15px;
+    width: 15px;
     margin: 5px;
     text-align: center;
     text-transform: uppercase;
     /* vertically align letters in div */
-    padding: 10px 10px; 
+    padding: 25px 25px; 
     border-radius: 15px;
 }
 
@@ -76,7 +78,18 @@ h2 {
 .buttons > button {
     /* add spacing around buttons */
     margin: 10px;
-    padding: 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color:seagreen;
+    color: aliceblue;
+    transition: 0.3s;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.buttons > button:hover {
+    opacity: 1;
 }
 
 .correct {

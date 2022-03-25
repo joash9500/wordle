@@ -12,10 +12,12 @@ let answer = validWords[Math.floor(Math.random()*validWords.length)].toLowerCase
 
 let answerObj = answer.split(""); //split the answer into object/array
 
-console.log(answerObj) //cheat
+console.log(answerObj) //show answer
 
 let guessCount = 0; //start counting user attempts
 let correctCount = 0; //initialise counter for correct letters
+
+let resetTimer = "";
 
 //hide restart and check buttons
 document.getElementById('restartButton').style.display = 'none'
@@ -37,7 +39,7 @@ submitButton.addEventListener('click', function() {
 function checkLetter(attemptID) {
 
     const guessObj = guessV.value.toLowerCase().split(""); //split player's guess word into lowercase, and convert into an object.
-    console.log(guessObj);
+    
     correctCount = 0; //reset counter
 
     //iterate over answerObj to check if guessV matches
@@ -98,7 +100,6 @@ function attempt(guessCount) {
 function reset() {
     //set timer back to 60 seconds and restart countdown
     document.querySelector('#timer > span').innerHTML='00:60';
-    timer()
 
     //generate random word again
     answerObj = validWords[Math.floor(Math.random()*validWords.length)].toLowerCase().split("")
@@ -117,16 +118,23 @@ function reset() {
             wordleRow[k].innerText = "" //delete letter text
             wordleRow[k].classList.remove('almost','correct')
         }
+        //resetTimer to true
+        resetTimer = true;
     }
     
     //hide 'Try again' button after above code is run
     document.getElementById('restartButton').style.display = 'none';
-
+    //update page with attempts reset
+    document.querySelector('footer > p > span').innerText = guessCount;
+    //show start button again
+    document.getElementById('startButton').style.display = 'block';
 }
 
 //create a countdown timer. Source code from stackoverflow by Mikhail: https://stackoverflow.com/questions/31559469/how-to-create-a-simple-javascript-timer
 
 function timer() {
+    resetTimer = false;
+
     let sec = 60; //set a 60 second timer
     let second60 = setInterval(function(){
         document.querySelector('#timer > span').innerHTML='00:'+sec;
@@ -144,6 +152,9 @@ function timer() {
             clearInterval(second60)
 
         } else if (guessCount > 5) {
+            //stop counter when guesses exceed 5
+            clearInterval(second60)
+        } else if (resetTimer) {
             clearInterval(second60)
         }
     },1000)
