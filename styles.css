@@ -57,7 +57,8 @@ h2 {
 }
 
 #box2 {
-    text-align: center;
+    /* center the block elements */
+    margin: auto;
 }
 
 #guess {

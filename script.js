@@ -22,6 +22,7 @@ let resetTimer = "";
 //hide restart and check buttons
 document.getElementById('restartButton').style.display = 'none'
 document.getElementById('submit').style.display = 'none'
+document.getElementById('guess').style.display = 'none'
 
 submitButton.addEventListener('click', function() {
     if (guessV.value.length == 0) {
@@ -30,6 +31,7 @@ submitButton.addEventListener('click', function() {
     } else if (guessV.value.length == 5 && correctCount < 5) {
         guessCount = guessCount + 1;
         attempt(guessCount);
+
     } else {
         uMsg.innerText = 'Check your guess. It\'s a 5 letter word'
     }
@@ -91,7 +93,7 @@ function attempt(guessCount) {
         //show restart button
         document.getElementById('restartButton').style.display = 'block'
          
-        //hide check button when time runs out
+        //hide check button when attempts runs out
         document.getElementById('submit').style.display = 'none'
     }
 }
@@ -128,6 +130,8 @@ function reset() {
     document.querySelector('footer > p > span').innerText = guessCount;
     //show start button again
     document.getElementById('startButton').style.display = 'block';
+    //hide input field 
+    document.getElementById('guess').style.display = 'none'
 }
 
 //create a countdown timer. Source code from stackoverflow by Mikhail: https://stackoverflow.com/questions/31559469/how-to-create-a-simple-javascript-timer
@@ -162,6 +166,7 @@ function timer() {
     //hide start and show check button
     document.getElementById('startButton').style.display = 'none';
     document.getElementById('submit').style.display = 'block';
+    document.getElementById('guess').style.display = 'block'
 }
 
 
