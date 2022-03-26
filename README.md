@@ -1,6 +1,9 @@
 # wordle
 Project Wordle
 
+## Background
+This a wordle game with a 60 second timer.
+
 ## Game plan
 
 1. Player starts game by clicking the *start* button below the table.
@@ -34,3 +37,5 @@ Restart button shows after game ends. Player can click *Try again* button to sta
 5. grid for layout of page
 
 
+Link to live copy:
+https://joash9500.github.io/wordle/
